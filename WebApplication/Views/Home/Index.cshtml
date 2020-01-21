@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IndexViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(i => i.AccessToken)
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+
+        <div>
+            @Html.DisplayTextFor(model => model.AccessToken)
+        </div>
+
+        <div class="row">
+            @if (!Model.IsAuth)
+            {
+                <div class="col-md-1">
+                    <input type="submit" value="Login"
+                           asp-controller="Home" asp-action="DoLogin" />
+                </div>
+            }
+            @if (Model.IsAuth)
+            {
+                <div class="col-md-1">
+                    <input type="submit" value="Logout"
+                           asp-controller="Home" asp-action="DoLogout" />
+                </div>
+            }
+            <div class="col-md-1">
+                <input type="submit" value="Execute"
+                       asp-controller="Home" asp-action="DoAction" />
+            </div>
+        </div>
+    </div>
+
+    @Html.DisplayTextFor(i => i.TestData)
+}
